@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import authAxiosInstance from '../../api/authAxiosInstance';
 
 export default function Cart() {
@@ -9,7 +9,9 @@ export default function Cart() {
     console.log(response);
   }
 
-
+  useEffect(()=>{
+    getItems();
+  },[])
 
   return (
     <div>

@@ -24,7 +24,7 @@ export default function Login() {
   const LoginForm = async(data)=>{
     try {
       const response = await axiosInstance.post(`/auth/Account/Login`,data);
-      localStorage.setItem("accessToken",response.data.accessToken);
+      setToken(response.data.token);
     } catch (err) {
       setServerErrors(err.response.data.errors);
     }

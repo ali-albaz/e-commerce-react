@@ -9,11 +9,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../validations/LoginSchema'
 import { CircularProgress } from '@mui/material'
 import axiosInstance from '../../api/axiosInstance'
+import useAuthStore from '../../store/useAuthStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
 
-  const[serverErrors,setServerErrors] = useState([]);
+  const navigate = useNavigate();
 
+  const[serverErrors,setServerErrors] = useState([]);
+  const setToken = useAuthStore((state)=> state.setToken );
   const {register,handleSubmit,formState:{errors,isSubmitting}} = useForm(
     {
       resolver:yupResolver(loginSchema)
@@ -24,7 +28,8 @@ export default function Login() {
   const LoginForm = async(data)=>{
     try {
       const response = await axiosInstance.post(`/auth/Account/Login`,data);
-      setToken(response.data.token);
+      setToken(response.data.accessToken);
+      navigate('/');
     } catch (err) {
       setServerErrors(err.response.data.errors);
     }

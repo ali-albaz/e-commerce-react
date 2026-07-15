@@ -9,6 +9,7 @@ import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
+import { Link } from "react-router-dom";
 
 
 
@@ -26,18 +27,20 @@ export default function Products() {
 
             {data.response.data.map((product)=>{
                 return <Grid items size = {{xs: 6 , md: 4 }} sx={{textAlign:'center'}}>
-                            <Card>
-                                <CardMedia
-                                component="img"
-                                image = {product.image}
-                                sx={{width: 200 }}
-                                ></CardMedia>
+                            <Link to={`/product/${product.id}`} style={{textDecoration:'none' , color:'inherit'}} >
+                                <Card>
+                                    <CardMedia
+                                    component="img"
+                                    image = {product.image}
+                                    sx={{width: 200 }}
+                                    ></CardMedia>
 
-                                <CardContent>
-                                    <Typography component = "h3" variant="h3">{product.name}</Typography>
-                                    <Typography component = "span" variant="body1">{product.price}$</Typography>
-                                </CardContent>
-                            </Card>
+                                    <CardContent>
+                                        <Typography component = "h3" variant="h3">{product.name}</Typography>
+                                        <Typography component = "span" variant="body1">{product.price}$</Typography>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                        </Grid>
             })}
 
